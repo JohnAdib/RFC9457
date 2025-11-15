@@ -1,6 +1,6 @@
 {
 	"name": "rfc9457",
-	"version": "2.0.0",
+	"version": "3.0.0",
 	"description": "RFC 9457 Problem Details for HTTP APIs - A standardized error handling package for Node.js",
 	"type": "module",
 	"main": "dist/index.js",
@@ -12,8 +12,10 @@
 		}
 	},
 	"scripts": {
-		"build": "tsc",
+		"clean": "rm -rf dist",
+		"build": "npm run clean && tsc",
 		"prepare": "npm run build",
+		"prepublishOnly": "npm run lint && npm run build",
 		"lint": "biome check && biome format . && biome lint",
 		"lint:fix": "biome check --write && biome format . --write && biome lint --fix",
 		"test": "echo \"Error: no test specified\" && exit 1"
@@ -30,6 +32,7 @@
 	],
 	"author": "",
 	"license": "MIT",
+	"homepage": "https://github.com/JohnAdib/rfc9457#readme",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/JohnAdib/rfc9457.git"
@@ -42,6 +45,7 @@
 		"README.md",
 		"LICENSE"
 	],
+	"sideEffects": false,
 	"engines": {
 		"node": ">=22.0.0"
 	},

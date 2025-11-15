@@ -1,6 +1,5 @@
 export interface ErrorConfig {
 	baseUrl?: string;
-	includeStack?: boolean;
 }
 
 export interface HttpErrorParams {
