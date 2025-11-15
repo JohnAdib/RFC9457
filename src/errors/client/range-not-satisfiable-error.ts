@@ -1,5 +1,9 @@
 import { HttpError } from "../../core/index.js";
-import { getErrorType, normalizeToString } from "../../helpers/index.js";
+import {
+	extractCause,
+	getErrorType,
+	normalizeToString,
+} from "../../helpers/index.js";
 
 export class RangeNotSatisfiableError extends HttpError {
 	constructor(detail: unknown) {
@@ -8,6 +12,7 @@ export class RangeNotSatisfiableError extends HttpError {
 			title: "Range Not Satisfiable",
 			status: 416,
 			detail: normalizeToString(detail),
+			cause: extractCause(detail),
 		});
 		this.name = "RangeNotSatisfiableError";
 	}

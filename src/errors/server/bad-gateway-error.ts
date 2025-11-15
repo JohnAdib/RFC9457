@@ -1,4 +1,5 @@
 import { HttpError } from "../../core/index.js";
+import { extractCause } from "../../helpers/extract-cause.js";
 import { getErrorType } from "../../helpers/get-error-type.js";
 import { normalizeToString } from "../../helpers/normalize-to-string.js";
 
@@ -11,6 +12,7 @@ export class BadGatewayError extends HttpError {
 			title: "Bad Gateway",
 			status: 502,
 			detail: normalizeToString(detail),
+			cause: extractCause(detail),
 		});
 		this.name = "BadGatewayError";
 		this.service = service;

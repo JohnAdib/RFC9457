@@ -1,5 +1,9 @@
 import { HttpError } from "../../core/index.js";
-import { getErrorType, normalizeToString } from "../../helpers/index.js";
+import {
+	extractCause,
+	getErrorType,
+	normalizeToString,
+} from "../../helpers/index.js";
 
 export class VariantAlsoNegotiatesError extends HttpError {
 	constructor(detail: unknown) {
@@ -8,6 +12,7 @@ export class VariantAlsoNegotiatesError extends HttpError {
 			title: "Variant Also Negotiates",
 			status: 506,
 			detail: normalizeToString(detail),
+			cause: extractCause(detail),
 		});
 		this.name = "VariantAlsoNegotiatesError";
 	}

@@ -1,5 +1,9 @@
 import { HttpError } from "../../core/index.js";
-import { getErrorType, normalizeToString } from "../../helpers/index.js";
+import {
+	extractCause,
+	getErrorType,
+	normalizeToString,
+} from "../../helpers/index.js";
 
 export class ExpectationFailedError extends HttpError {
 	constructor(detail: unknown) {
@@ -8,6 +12,7 @@ export class ExpectationFailedError extends HttpError {
 			title: "Expectation Failed",
 			status: 417,
 			detail: normalizeToString(detail),
+			cause: extractCause(detail),
 		});
 		this.name = "ExpectationFailedError";
 	}

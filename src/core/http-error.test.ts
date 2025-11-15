@@ -88,4 +88,32 @@ describe("HttpError", () => {
 		});
 		expect(json).not.toHaveProperty("instance");
 	});
+
+	it("should support cause property", () => {
+		const originalError = new Error("Original error message");
+		const error = new HttpError({
+			status: 500,
+			title: "Internal Server Error",
+			type: "about:blank",
+			detail: "Wrapped error",
+			cause: originalError,
+		});
+
+		expect(error.cause).toBe(originalError);
+	});
+
+	it("should propagate cause chain", () => {
+		const rootCause = new Error("Root cause");
+		const middleError = new Error("Middle error", { cause: rootCause });
+		const error = new HttpError({
+			status: 500,
+			title: "Internal Server Error",
+			type: "about:blank",
+			detail: "Top level error",
+			cause: middleError,
+		});
+
+		expect(error.cause).toBe(middleError);
+		expect((error.cause as Error).cause).toBe(rootCause);
+	});
 });

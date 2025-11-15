@@ -8,7 +8,7 @@ export class HttpError extends Error {
 	public readonly instance?: string;
 
 	constructor(params: HttpErrorParams) {
-		super(params.detail);
+		super(params.detail, { cause: params.cause });
 		this.name = "HttpError";
 		this.type = params.type;
 		this.title = params.title;

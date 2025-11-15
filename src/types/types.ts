@@ -8,6 +8,7 @@ export interface HttpErrorParams {
 	status: number;
 	detail: string;
 	instance?: string;
+	cause?: Error;
 }
 
 export interface ValidationErrors {

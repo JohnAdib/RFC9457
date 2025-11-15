@@ -1,5 +1,9 @@
 import { HttpError } from "../../core/index.js";
-import { getErrorType, normalizeToString } from "../../helpers/index.js";
+import {
+	extractCause,
+	getErrorType,
+	normalizeToString,
+} from "../../helpers/index.js";
 
 export class UpgradeRequiredError extends HttpError {
 	constructor(detail: unknown) {
@@ -8,6 +12,7 @@ export class UpgradeRequiredError extends HttpError {
 			title: "Upgrade Required",
 			status: 426,
 			detail: normalizeToString(detail),
+			cause: extractCause(detail),
 		});
 		this.name = "UpgradeRequiredError";
 	}
