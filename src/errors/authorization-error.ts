@@ -3,13 +3,13 @@ import { getErrorType } from "../helpers/get-error-type.js";
 import { normalizeToString } from "../helpers/normalize-to-string.js";
 
 export class AuthorizationError extends HttpError {
-  constructor(detail: unknown) {
-    super({
-      type: getErrorType("authorization"),
-      title: "Forbidden",
-      status: 403,
-      detail: normalizeToString(detail),
-    });
-    this.name = "AuthorizationError";
-  }
+	constructor(detail: unknown) {
+		super({
+			type: getErrorType("authorization"),
+			title: "Forbidden",
+			status: 403,
+			detail: normalizeToString(detail),
+		});
+		this.name = "AuthorizationError";
+	}
 }

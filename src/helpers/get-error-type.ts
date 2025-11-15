@@ -1,12 +1,12 @@
 import { getConfig } from "../config/index.js";
 
 export function getErrorType(name: string): string {
-  const config = getConfig();
-  const baseUrl = config.baseUrl || "about:blank";
+	const config = getConfig();
+	const baseUrl = config.baseUrl || "about:blank";
 
-  if (baseUrl === "about:blank") {
-    return `${baseUrl}#${name}`;
-  }
+	if (baseUrl === "about:blank") {
+		return `${baseUrl}#${name}`;
+	}
 
-  return `${baseUrl}/${name}`;
+	return `${baseUrl}/${name}`;
 }

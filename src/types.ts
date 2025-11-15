@@ -1,16 +1,16 @@
 export interface ErrorConfig {
-  baseUrl?: string;
-  includeStack?: boolean;
+	baseUrl?: string;
+	includeStack?: boolean;
 }
 
 export interface HttpErrorParams {
-  type: string;
-  title: string;
-  status: number;
-  detail: string;
-  instance?: string;
+	type: string;
+	title: string;
+	status: number;
+	detail: string;
+	instance?: string;
 }
 
 export interface ValidationErrors {
-  [field: string]: string[];
+	[field: string]: string[];
 }
