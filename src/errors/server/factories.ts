@@ -24,6 +24,13 @@ const standardFactories = {
 
 const aliases = {
 	db: (detail: unknown) => standardFactories.serviceUnavailable(detail),
+	fetch: (detail: unknown, service?: string) =>
+		standardFactories.badGateway(detail, service),
+	envNotSet: (detail: unknown) => standardFactories.notImplemented(detail),
+	maintenance: (detail: unknown, retryAfter?: number) =>
+		standardFactories.serviceUnavailable(detail, retryAfter),
+	migrationFailed: (detail: unknown) =>
+		standardFactories.insufficientStorage(detail),
 };
 
 export const factories = {

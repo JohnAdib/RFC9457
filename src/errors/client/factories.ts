@@ -1,7 +1,7 @@
 import type { ValidationErrors } from "../../types/index.js";
 import * as ErrorClasses from "./index.js";
 
-export const factories = {
+const standardFactories = {
 	badRequest: (detail: unknown) => new ErrorClasses.BadRequestError(detail),
 	paymentRequired: (detail: unknown) =>
 		new ErrorClasses.PaymentRequiredError(detail),
@@ -52,4 +52,20 @@ export const factories = {
 		new ErrorClasses.RequestHeaderFieldsTooLargeError(detail),
 	unavailableForLegalReasons: (detail: unknown) =>
 		new ErrorClasses.UnavailableForLegalReasonsError(detail),
+};
+
+const aliases = {
+	validate: (detail: unknown, validationErrors?: ValidationErrors) =>
+		standardFactories.validation(detail, validationErrors),
+	permission: (detail: unknown) => standardFactories.authorization(detail),
+	access: (detail: unknown) => standardFactories.authorization(detail),
+	idNotFound: (resourceOrDetail: unknown, id?: string) =>
+		standardFactories.notFound(resourceOrDetail, id),
+	duplicate: (detail: unknown) => standardFactories.conflict(detail),
+	thirdParty: (detail: unknown) => standardFactories.failedDependency(detail),
+};
+
+export const factories = {
+	...standardFactories,
+	...aliases,
 };

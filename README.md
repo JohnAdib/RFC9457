@@ -94,9 +94,23 @@ throw errors.server.db("Connection pool exhausted");
 
 **Convenient Aliases:**
 
+Common shortcuts for frequent use cases:
+
 | Alias | Maps To | Status | Example |
 |-------|---------|--------|---------|
+| **Client Aliases** | | | |
+| `validate` | `validation` | 422 | `errors.client.validate("Invalid email format")` |
+| `permission` | `authorization` | 403 | `errors.client.permission("Access denied")` |
+| `access` | `authorization` | 403 | `errors.client.access("Insufficient permissions")` |
+| `idNotFound` | `notFound` | 404 | `errors.client.idNotFound("User", "123")` |
+| `duplicate` | `conflict` | 409 | `errors.client.duplicate("Email already exists")` |
+| `thirdParty` | `failedDependency` | 424 | `errors.client.thirdParty("External service failed")` |
+| **Server Aliases** | | | |
 | `db` | `serviceUnavailable` | 503 | `errors.server.db("Connection pool exhausted")` |
+| `fetch` | `badGateway` | 502 | `errors.server.fetch("GitHub API unreachable")` |
+| `envNotSet` | `notImplemented` | 501 | `errors.server.envNotSet("DATABASE_URL not configured")` |
+| `maintenance` | `serviceUnavailable` | 503 | `errors.server.maintenance("System under maintenance")` |
+| `migrationFailed` | `insufficientStorage` | 507 | `errors.server.migrationFailed("Migration storage limit exceeded")` |
 
 ## Usage Examples
 
@@ -153,15 +167,68 @@ throw errors.client.notFound("User", "123");
 throw errors.client.notFound("Custom message: User not found in database");
 ```
 
-### Database Error Alias
+### Using Convenient Aliases
 
 ```typescript
 import { errors } from "rfc9457";
 
+// Validation errors
+if (!email.includes("@")) {
+  throw errors.client.validate("Invalid email format");
+}
+
+// Permission checks
+if (!user.isAdmin) {
+  throw errors.client.permission("Admin access required");
+}
+
+// ID lookups
+const user = await db.findUser(userId);
+if (!user) {
+  throw errors.client.idNotFound("User", userId);
+}
+
+// Duplicate entries
+if (await db.emailExists(email)) {
+  throw errors.client.duplicate("User with this email already exists");
+}
+
+// Database errors
 try {
   await db.query("SELECT * FROM users");
 } catch (err) {
   throw errors.server.db(err);
+}
+
+// External API failures
+try {
+  await fetch("https://api.github.com/users/octocat");
+} catch (err) {
+  throw errors.server.fetch(err);
+}
+
+// Third-party integrations
+try {
+  await stripe.customers.create({ email });
+} catch (err) {
+  throw errors.client.thirdParty(err);
+}
+
+// Environment configuration
+if (!process.env.DATABASE_URL) {
+  throw errors.server.envNotSet("DATABASE_URL environment variable not set");
+}
+
+// Maintenance mode
+if (isMaintenanceMode) {
+  throw errors.server.maintenance("System is under scheduled maintenance", 3600);
+}
+
+// Migration failures
+try {
+  await runMigration();
+} catch (err) {
+  throw errors.server.migrationFailed(err);
 }
 ```
 
