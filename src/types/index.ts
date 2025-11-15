@@ -1,1 +1,5 @@
-export type { ErrorConfig, HttpErrorParams, ValidationErrors } from "./types.js";
+export type {
+	ErrorConfig,
+	HttpErrorParams,
+	ValidationErrors,
+} from "./types.js";
