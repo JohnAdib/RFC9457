@@ -282,8 +282,7 @@ app.use((err, req, res, next) => {
 
 ```typescript
 import { Hono } from "hono";
-import { honoErrorMiddleware } from "rfc9457/hono";
-import { errors } from "rfc9457";
+import { errors, honoErrorMiddleware } from "rfc9457";
 
 const app = new Hono();
 
