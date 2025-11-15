@@ -114,7 +114,6 @@ throw error.badRequest("Invalid JSON");
 | Alias | Maps To | Status | Example |
 |-------|---------|--------|---------|
 | `db` | `serviceUnavailable` | 503 | `errors.server.db("Connection pool exhausted")` |
-| `database` | `serviceUnavailable` | 503 | `errors.server.database("Query timeout")` |
 
 ## Usage Examples
 
@@ -271,22 +270,10 @@ fastify.setErrorHandler((error, request, reply) => {
 
 ## Configuration
 
-### Environment Variable
-
-Set the base URL for error type URIs:
+Set the base URL for error type URIs using the environment variable:
 
 ```bash
 export RFC9457_BASE_URL=https://api.example.com/errors
-```
-
-### Programmatic Configuration
-
-```typescript
-import { configure } from "rfc9457";
-
-configure({
-  baseUrl: "https://api.example.com/errors",
-});
 ```
 
 ## Error Response Format
@@ -321,7 +308,7 @@ With custom base URL:
 Full type safety and IDE autocomplete:
 
 ```typescript
-import { errors, isHttpError, ValidationError } from "rfc9457";
+import { errors, isHttpError } from "rfc9457";
 
 const err = errors.client.validation("Invalid data");
 
@@ -351,38 +338,15 @@ throw error.badRequest("Invalid input");
 throw error.internal("System error");
 ```
 
-### Individual Error Classes
+### Helper
 
 ```typescript
-import {
-  BadRequestError,
-  AuthenticationError,
-  ValidationError,
-} from "rfc9457";
-
-throw new ValidationError("Invalid email");
-```
-
-### Client/Server Namespace Imports
-
-```typescript
-import { client, server } from "rfc9457";
-
-throw new client.NotFoundError("User", "123");
-throw new server.InternalServerError("Database error");
-```
-
-### Helpers
-
-```typescript
-import { isHttpError, configure, getConfig } from "rfc9457";
+import { isHttpError } from "rfc9457";
 
 if (isHttpError(err)) {
   console.log(err.status);
+  console.log(err.toJSON());
 }
-
-configure({ baseUrl: "https://api.example.com/errors" });
-const config = getConfig();
 ```
 
 ## Development
