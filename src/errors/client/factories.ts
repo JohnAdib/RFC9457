@@ -15,19 +15,35 @@ export const factories = {
 		new ErrorClasses.MethodNotAllowedError(detail),
 	notAcceptable: (detail: unknown) =>
 		new ErrorClasses.NotAcceptableError(detail),
+	proxyAuthenticationRequired: (detail: unknown) =>
+		new ErrorClasses.ProxyAuthenticationRequiredError(detail),
 	requestTimeout: (detail: unknown) =>
 		new ErrorClasses.RequestTimeoutError(detail),
 	conflict: (detail: unknown) => new ErrorClasses.ConflictError(detail),
 	gone: (detail: unknown) => new ErrorClasses.GoneError(detail),
+	lengthRequired: (detail: unknown) =>
+		new ErrorClasses.LengthRequiredError(detail),
 	preconditionFailed: (detail: unknown) =>
 		new ErrorClasses.PreconditionFailedError(detail),
 	payloadTooLarge: (detail: unknown, maxSize?: number) =>
 		new ErrorClasses.PayloadTooLargeError(detail, maxSize),
+	uriTooLong: (detail: unknown) => new ErrorClasses.UriTooLongError(detail),
 	unsupportedMediaType: (detail: unknown) =>
 		new ErrorClasses.UnsupportedMediaTypeError(detail),
+	rangeNotSatisfiable: (detail: unknown) =>
+		new ErrorClasses.RangeNotSatisfiableError(detail),
+	expectationFailed: (detail: unknown) =>
+		new ErrorClasses.ExpectationFailedError(detail),
+	misdirectedRequest: (detail: unknown) =>
+		new ErrorClasses.MisdirectedRequestError(detail),
 	validation: (detail: unknown, validationErrors?: ValidationErrors) =>
 		new ErrorClasses.ValidationError(detail, validationErrors),
 	locked: (detail: unknown) => new ErrorClasses.LockedError(detail),
+	failedDependency: (detail: unknown) =>
+		new ErrorClasses.FailedDependencyError(detail),
+	tooEarly: (detail: unknown) => new ErrorClasses.TooEarlyError(detail),
+	upgradeRequired: (detail: unknown) =>
+		new ErrorClasses.UpgradeRequiredError(detail),
 	preconditionRequired: (detail: unknown) =>
 		new ErrorClasses.PreconditionRequiredError(detail),
 	rateLimit: (detail: unknown, retryAfter?: number) =>
