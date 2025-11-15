@@ -1,6 +1,6 @@
-import { HttpError } from "../core/index.js";
-import { getErrorType } from "../helpers/get-error-type.js";
-import { normalizeToString } from "../helpers/normalize-to-string.js";
+import { HttpError } from "../../core/index.js";
+import { getErrorType } from "../../helpers/get-error-type.js";
+import { normalizeToString } from "../../helpers/normalize-to-string.js";
 
 export class AuthenticationError extends HttpError {
 	constructor(detail: unknown) {

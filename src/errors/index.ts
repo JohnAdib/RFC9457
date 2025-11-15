@@ -1,13 +1,5 @@
-export { AuthenticationError } from "./authentication-error.js";
-export { AuthorizationError } from "./authorization-error.js";
-export { BadGatewayError } from "./bad-gateway-error.js";
-export { BadRequestError } from "./bad-request-error.js";
-export { ConflictError } from "./conflict-error.js";
-export { GatewayTimeoutError } from "./gateway-timeout-error.js";
-export { InternalServerError } from "./internal-server-error.js";
-export { MethodNotAllowedError } from "./method-not-allowed-error.js";
-export { NotFoundError } from "./not-found-error.js";
-export { NotImplementedError } from "./not-implemented-error.js";
-export { RateLimitError } from "./rate-limit-error.js";
-export { ServiceUnavailableError } from "./service-unavailable-error.js";
-export { ValidationError } from "./validation-error.js";
+export * as client from "./client/index.js";
+export * as server from "./server/index.js";
+
+export * from "./client/index.js";
+export * from "./server/index.js";

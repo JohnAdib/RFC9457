@@ -1,7 +1,7 @@
-import { HttpError } from "../core/index.js";
-import { getErrorType } from "../helpers/get-error-type.js";
-import { normalizeToString } from "../helpers/normalize-to-string.js";
-import type { ValidationErrors } from "../types.js";
+import { HttpError } from "../../core/index.js";
+import { getErrorType } from "../../helpers/get-error-type.js";
+import { normalizeToString } from "../../helpers/normalize-to-string.js";
+import type { ValidationErrors } from "../../types/index.js";
 
 export class ValidationError extends HttpError {
 	public readonly validationErrors?: ValidationErrors;

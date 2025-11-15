@@ -1,4 +1,4 @@
-import type { HttpErrorParams } from "../types.js";
+import type { HttpErrorParams } from "../types/index.js";
 
 export class HttpError extends Error {
 	public readonly type: string;
