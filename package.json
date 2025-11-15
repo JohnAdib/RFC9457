@@ -1,0 +1,41 @@
+{
+  "name": "rfc9457",
+  "version": "0.1.0",
+  "description": "RFC 9457 Problem Details for HTTP APIs - A standardized error handling package for Node.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "rfc9457",
+    "error",
+    "http",
+    "problem-details",
+    "error-handling",
+    "nodejs"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/rfc9457.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/rfc9457/issues"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  }
+}
