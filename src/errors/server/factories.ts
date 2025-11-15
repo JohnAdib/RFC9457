@@ -31,6 +31,8 @@ const aliases = {
 		standardFactories.serviceUnavailable(detail, retryAfter),
 	migrationFailed: (detail: unknown) =>
 		standardFactories.insufficientStorage(detail),
+	unhandledRejection: (detail: unknown) => standardFactories.internal(detail),
+	uncaughtException: (detail: unknown) => standardFactories.internal(detail),
 };
 
 export const factories = {

@@ -111,6 +111,8 @@ Common shortcuts for frequent use cases:
 | `envNotSet` | `notImplemented` | 501 | `errors.server.envNotSet("DATABASE_URL not configured")` |
 | `maintenance` | `serviceUnavailable` | 503 | `errors.server.maintenance("System under maintenance")` |
 | `migrationFailed` | `insufficientStorage` | 507 | `errors.server.migrationFailed("Migration storage limit exceeded")` |
+| `unhandledRejection` | `internal` | 500 | `errors.server.unhandledRejection("Unhandled promise rejection")` |
+| `uncaughtException` | `internal` | 500 | `errors.server.uncaughtException("Uncaught exception")` |
 
 ## Usage Examples
 
@@ -230,6 +232,17 @@ try {
 } catch (err) {
   throw errors.server.migrationFailed(err);
 }
+
+// Node.js process error handlers
+process.on('unhandledRejection', (reason) => {
+  console.error(errors.server.unhandledRejection(reason));
+  process.exit(1);
+});
+
+process.on('uncaughtException', (error) => {
+  console.error(errors.server.uncaughtException(error));
+  process.exit(1);
+});
 ```
 
 ## Framework Integration
