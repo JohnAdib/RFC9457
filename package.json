@@ -1,6 +1,6 @@
 {
 	"name": "rfc9457",
-	"version": "0.1.0",
+	"version": "1.0.0",
 	"description": "RFC 9457 Problem Details for HTTP APIs - A standardized error handling package for Node.js",
 	"type": "module",
 	"main": "dist/index.js",
@@ -16,7 +16,6 @@
 		"prepare": "npm run build",
 		"lint": "biome check && biome format . && biome lint",
 		"lint:fix": "biome check --write && biome format . --write && biome lint --fix",
-		"lint:fix:unsafe": "biome lint --fix --unsafe",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"keywords": [
@@ -49,6 +48,8 @@
 	"devDependencies": {
 		"@biomejs/biome": "2.3.5",
 		"@types/node": "24.10.1",
-		"typescript": "^5.9.3"
+		"@vitest/coverage-v8": "^4.0.9",
+		"typescript": "^5.9.3",
+		"vitest": "^4.0.9"
 	}
 }
