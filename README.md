@@ -12,8 +12,9 @@ TypeScript-first error handling package implementing [RFC 9457 Problem Details f
 - **Categorized API** - Clean, readable error handling with `errors.client.*` and `errors.server.*`
 - **39 Standard HTTP Errors** - Complete coverage of all standard HTTP error codes
 - **Convenient Aliases** - Common shortcuts like `errors.server.db()` for frequent use cases
+- **Built-in Middleware** - Ready-to-use error handlers for popular frameworks (Hono, and more coming)
 - **Framework Agnostic** - Works with Express, Hono, Fastify, and any Node.js framework
-- **Zero Dependencies** - Lightweight with no external dependencies
+- **Zero Dependencies** - Lightweight with no external dependencies (middleware have optional peer dependencies)
 - **ESM Only** - Modern ES Modules for Node.js 22+
 
 ## Installation
@@ -277,6 +278,30 @@ app.use((err, req, res, next) => {
 
 ### Hono
 
+**Option 1: Using the built-in middleware (recommended)**
+
+```typescript
+import { Hono } from "hono";
+import { honoErrorMiddleware } from "rfc9457/hono";
+import { errors } from "rfc9457";
+
+const app = new Hono();
+
+app.get("/users/:id", async (c) => {
+  const user = await db.users.findById(c.req.param("id"));
+
+  if (!user) {
+    throw errors.client.notFound("User", c.req.param("id"));
+  }
+
+  return c.json(user);
+});
+
+app.onError(honoErrorMiddleware);
+```
+
+**Option 2: Manual error handling**
+
 ```typescript
 import { Hono } from "hono";
 import { errors, isHttpError } from "rfc9457";
@@ -300,6 +325,22 @@ app.onError((err, c) => {
 
   const internalError = errors.server.internal(err);
   return c.json(internalError.toJSON(), 500);
+});
+```
+
+**Process Error Handlers**
+
+```typescript
+import { errors } from "rfc9457";
+
+process.on('unhandledRejection', (reason) => {
+  console.error(errors.server.unhandledRejection(reason));
+  process.exit(1);
+});
+
+process.on('uncaughtException', (error) => {
+  console.error(errors.server.uncaughtException(error));
+  process.exit(1);
 });
 ```
 
