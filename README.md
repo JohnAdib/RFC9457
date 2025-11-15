@@ -2,6 +2,8 @@
 
 TypeScript-first error handling package implementing [RFC 9457 Problem Details for HTTP APIs](https://www.rfc-editor.org/rfc/rfc9457.html).
 
+> RFC 9457 obsoletes [RFC 7807](https://www.rfc-editor.org/rfc/rfc7807.html) - this package implements the latest specification.
+
 ## Features
 
 - **RFC 9457 Compliant** - Strictly follows the Problem Details specification
@@ -33,25 +35,6 @@ throw errors.client.validation("Email is required");
 // Server errors
 throw errors.server.internal("Database connection failed");
 throw errors.server.db("Connection pool exhausted");
-```
-
-## Recommended API
-
-**We recommend using the categorized API** (`errors.client.*` / `errors.server.*`) as it makes your code more readable and explicit.
-
-```typescript
-import { errors } from "rfc9457";
-
-throw errors.client.badRequest("Invalid JSON");
-throw errors.server.serviceUnavailable("Maintenance mode");
-```
-
-**Flat API Alternative**: If you prefer brevity, you can use the flat API with `error.*`, but the categorized approach is recommended for better code clarity.
-
-```typescript
-import { error } from "rfc9457";
-
-throw error.badRequest("Invalid JSON");
 ```
 
 ## Available Errors
