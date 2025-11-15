@@ -110,6 +110,7 @@ Common shortcuts for frequent use cases:
 | `db` | `serviceUnavailable` | 503 | `errors.server.db("Connection pool exhausted")` |
 | `fetch` | `badGateway` | 502 | `errors.server.fetch("GitHub API unreachable")` |
 | `envNotSet` | `notImplemented` | 501 | `errors.server.envNotSet("DATABASE_URL not configured")` |
+| `envInvalid` | `notImplemented` | 501 | `errors.server.envInvalid("DATABASE_URL must be a valid URL")` |
 | `maintenance` | `serviceUnavailable` | 503 | `errors.server.maintenance("System under maintenance")` |
 | `migration` | `insufficientStorage` | 507 | `errors.server.migration("Migration storage limit exceeded")` |
 | `unhandledRejection` | `internal` | 500 | `errors.server.unhandledRejection("Unhandled promise rejection")` |
@@ -217,9 +218,14 @@ try {
   throw errors.client.thirdParty(err);
 }
 
-// Environment configuration
+// Environment configuration - missing
 if (!process.env.DATABASE_URL) {
   throw errors.server.envNotSet("DATABASE_URL environment variable not set");
+}
+
+// Environment configuration - invalid value
+if (process.env.NODE_ENV && !["development", "production", "test"].includes(process.env.NODE_ENV)) {
+  throw errors.server.envInvalid("NODE_ENV must be development, production, or test");
 }
 
 // Maintenance mode

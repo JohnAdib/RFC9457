@@ -27,6 +27,7 @@ const aliases = {
 	fetch: (detail: unknown, service?: string) =>
 		standardFactories.badGateway(detail, service),
 	envNotSet: (detail: unknown) => standardFactories.notImplemented(detail),
+	envInvalid: (detail: unknown) => standardFactories.notImplemented(detail),
 	maintenance: (detail: unknown, retryAfter?: number) =>
 		standardFactories.serviceUnavailable(detail, retryAfter),
 	migration: (detail: unknown) => standardFactories.insufficientStorage(detail),
