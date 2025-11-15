@@ -29,8 +29,7 @@ const aliases = {
 	envNotSet: (detail: unknown) => standardFactories.notImplemented(detail),
 	maintenance: (detail: unknown, retryAfter?: number) =>
 		standardFactories.serviceUnavailable(detail, retryAfter),
-	migrationFailed: (detail: unknown) =>
-		standardFactories.insufficientStorage(detail),
+	migration: (detail: unknown) => standardFactories.insufficientStorage(detail),
 	unhandledRejection: (detail: unknown) => standardFactories.internal(detail),
 	uncaughtException: (detail: unknown) => standardFactories.internal(detail),
 };

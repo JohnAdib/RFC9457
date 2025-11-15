@@ -111,7 +111,7 @@ Common shortcuts for frequent use cases:
 | `fetch` | `badGateway` | 502 | `errors.server.fetch("GitHub API unreachable")` |
 | `envNotSet` | `notImplemented` | 501 | `errors.server.envNotSet("DATABASE_URL not configured")` |
 | `maintenance` | `serviceUnavailable` | 503 | `errors.server.maintenance("System under maintenance")` |
-| `migrationFailed` | `insufficientStorage` | 507 | `errors.server.migrationFailed("Migration storage limit exceeded")` |
+| `migration` | `insufficientStorage` | 507 | `errors.server.migration("Migration storage limit exceeded")` |
 | `unhandledRejection` | `internal` | 500 | `errors.server.unhandledRejection("Unhandled promise rejection")` |
 | `uncaughtException` | `internal` | 500 | `errors.server.uncaughtException("Uncaught exception")` |
 
@@ -231,7 +231,7 @@ if (isMaintenanceMode) {
 try {
   await runMigration();
 } catch (err) {
-  throw errors.server.migrationFailed(err);
+  throw errors.server.migration(err);
 }
 
 // Node.js process error handlers
