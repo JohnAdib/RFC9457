@@ -1,9 +1,27 @@
-/**
- * RFC 9457 - Problem Details for HTTP APIs
- * A standardized error handling package for Node.js
- */
+export { error } from "./error.js";
+export { errors } from "./errors.js";
 
-// Placeholder for error handling implementation
-// This will be implemented based on RFC 9457 specification
+export { HttpError } from "./core/index.js";
 
-export {};
+export {
+  BadRequestError,
+  AuthenticationError,
+  AuthorizationError,
+  NotFoundError,
+  MethodNotAllowedError,
+  ConflictError,
+  ValidationError,
+  RateLimitError,
+  InternalServerError,
+  NotImplementedError,
+  BadGatewayError,
+  ServiceUnavailableError,
+  GatewayTimeoutError,
+} from "./errors/index.js";
+
+export { configure, getConfig } from "./config/index.js";
+
+export { isHttpError } from "./helpers/index.js";
+
+export type { ErrorConfig, HttpErrorParams, ValidationErrors } from "./types.js";
+export type { FlatErrorNamespace, CategorizedErrorNamespace } from "./namespace/index.js";
