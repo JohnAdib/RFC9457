@@ -1,6 +1,6 @@
 import * as ErrorClasses from "./index.js";
 
-export const factories = {
+const standardFactories = {
 	internal: (detail: unknown) => new ErrorClasses.InternalServerError(detail),
 	notImplemented: (detail: unknown) =>
 		new ErrorClasses.NotImplementedError(detail),
@@ -20,7 +20,13 @@ export const factories = {
 	notExtended: (detail: unknown) => new ErrorClasses.NotExtendedError(detail),
 	networkAuthenticationRequired: (detail: unknown) =>
 		new ErrorClasses.NetworkAuthenticationRequiredError(detail),
-	db: (detail: unknown) => new ErrorClasses.ServiceUnavailableError(detail),
-	database: (detail: unknown) =>
-		new ErrorClasses.ServiceUnavailableError(detail),
+};
+
+const aliases = {
+	db: (detail: unknown) => standardFactories.serviceUnavailable(detail),
+};
+
+export const factories = {
+	...standardFactories,
+	...aliases,
 };
