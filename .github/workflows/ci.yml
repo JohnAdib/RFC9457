@@ -59,7 +59,7 @@ jobs:
     strategy:
       matrix:
         node-version: [22.x, 24.x]
-    
+
     steps:
       - name: 📥 Checkout
         uses: actions/checkout@v5
@@ -78,7 +78,7 @@ jobs:
         with:
           files: ./coverage/coverage-final.json
           flags: unittests
-          fail_ci_if_error: false
+          fail_ci_if_error: true
 
   build:
     name: 🏗️ Build
