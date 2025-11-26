@@ -1,4 +1,4 @@
-import { getConfig } from "../config/index.js";
+import { getConfig } from "../../config/index.js";
 
 export function getErrorType(name: string): string {
 	const config = getConfig();

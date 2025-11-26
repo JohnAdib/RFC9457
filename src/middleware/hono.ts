@@ -1,5 +1,5 @@
 import { errors } from "../errors.js";
-import { isHttpError } from "../helpers/is-http-error.js";
+import { isHttpError } from "../helpers/index.js";
 
 export const honoErrorMiddleware = (err: Error) => {
 	if (isHttpError(err)) {

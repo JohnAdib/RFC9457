@@ -1,7 +1,9 @@
 import { HttpError } from "../../core/index.js";
-import { extractCause } from "../../helpers/extract-cause.js";
-import { getErrorType } from "../../helpers/get-error-type.js";
-import { normalizeToString } from "../../helpers/normalize-to-string.js";
+import {
+	extractCause,
+	getErrorType,
+	normalizeToString,
+} from "../../helpers/index.js";
 
 export class GatewayTimeoutError extends HttpError {
 	public readonly service?: string;
