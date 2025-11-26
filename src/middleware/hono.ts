@@ -1,7 +1,7 @@
 import { errors } from "../errors.js";
 import { isHttpError } from "../helpers/index.js";
 
-export const honoErrorMiddleware = (err: Error) => {
+export const honoErrorMiddleware = (err: Error): Response => {
 	if (isHttpError(err)) {
 		return new Response(JSON.stringify(err.toJSON()), {
 			status: err.status,
