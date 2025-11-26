@@ -1,6 +1,6 @@
 {
 	"name": "rfc9457",
-	"version": "15.0.0",
+	"version": "16.0.0",
 	"description": "RFC 9457 Problem Details for HTTP APIs - A standardized error handling package for Node.js",
 	"type": "module",
 	"main": "dist/index.js",
