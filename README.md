@@ -252,6 +252,23 @@ process.on('uncaughtException', (error) => {
 });
 ```
 
+### Additional Utilities
+
+```typescript
+import { errors, isValidRFC9457Json } from "rfc9457";
+
+// Create error by status code
+throw errors.byStatus(404, "Not found");
+
+// Get JSON without throwing
+const json = errors.client.badRequest("Invalid input").toJSON();
+
+// Validate RFC 9457 response
+if (isValidRFC9457Json(data)) {
+  // Valid RFC 9457 error
+}
+```
+
 ## Framework Integration
 
 ### Express
@@ -447,7 +464,7 @@ throw error.badRequest("Invalid input");
 throw error.internal("System error");
 ```
 
-### Helper
+### Helpers
 
 ```typescript
 import { isHttpError } from "rfc9457";
